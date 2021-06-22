@@ -1,0 +1,39 @@
+{
+    "header":{
+        "license": "//spx identifier: None.... Make sure this is right\n",
+        "pragmaStatement":{
+            "inputs":{
+                "compilerVersion":1 
+            },
+            "content":[
+            "pragma solidity ^",
+            "",
+            ";\n"
+            ]
+        },
+        "imports":{
+            "inputs":{
+                "importPaths":1
+            },
+            "content":[
+                "import ",
+                [""],
+                ";\n"
+            ]
+        },
+        "contractDefinition":{
+            "inputs":{
+                "name": 1,
+                "children": 3
+            },
+            "content":[
+                "contract",
+                "",
+                "is",
+                [""],
+                "{\n"
+            ]
+        }
+    },
+    "footer": "}"
+}

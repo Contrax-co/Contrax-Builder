@@ -1,0 +1,94 @@
+{
+    "header":{
+        "compilerVersion": "0.8.0",
+        "name": "Billy Coin!"
+    },
+    "accessors": {
+        "ownable": false,
+        "pausable": false,
+        "whiteList": true,
+        "blackList": true,
+        "timeLocked": false
+    },
+    "functions": {
+        "tax": {
+            "included": false,
+            "taxSheet": [
+                {
+                    "receiver": "ADDRESS",
+                    "percent": 0
+                }
+            ],
+            "toggleAble": {
+                "included": false,
+                "permissions": {
+                    "owner": 0,
+                    "list": {
+                        "0x000000":0
+                    }
+                }
+            }
+        },
+        "airdrop": {
+            "included": false,
+            "mintAmmount": 0,
+            "callableOnce": false,
+            "permissions": {
+                "owner": 0,
+                "list": {
+                    "0x000000":0
+                }
+            }
+        },
+        "emptyVault": {
+            "included": false,
+            "toExchange": "ADDRESS",
+            "ExchangeFor": "ADDRESS",
+            "receiver": "ADDRESS",
+            "permissions": {
+                "owner": 0,
+                "list": {
+                    "0x000000":0
+                }
+            }
+        },
+        "burn": {
+            "included": false,
+            "permissions": {
+                "owner": 0,
+                "list": {
+                    "0x000000":0
+                }
+            }
+        },
+        "mint": {
+            "included": false,
+            "max": 0,
+            "permissions": {
+                "owner": 0,
+                "list": {
+                    "0x000000":0
+                }
+            }
+        },
+        "updateListEntry": {
+            "included": false,
+            "permissions": {
+                "owner": 0,
+                "list": {
+                    "0x000000":0
+                }
+            }
+        },
+        "rebasing": {
+            "included": false,
+            "permissions": {
+                "owner": 0,
+                "list": {
+                    "0x000000":0
+                }
+            }
+        } 
+    }
+}
+
