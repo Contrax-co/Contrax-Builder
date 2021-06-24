@@ -35,11 +35,11 @@ set(blueprint.header.contractDefinition.inputs.children,
 //Create contract constructor
 //Set token name
 set(blueprint.constructor.inputs.name,
-    params.header.name,
+    '"'+params.header.name+'"',
     blueprint.constructor.content);
 //Set token symbol
 set(blueprint.constructor.inputs.symbol,
-    params.header.symbol,
+    '"'+params.header.symbol+'"',
     blueprint.constructor.content);
 
 //Write blueprint
@@ -75,12 +75,12 @@ function filter(p){
 
 function getChildContracts(p){
     let children = {
-        imports: ["@openzeppelin/contracts/token/ERC20/ERC20.sol"],
+        imports: ['"@openzeppelin/contracts/token/ERC20/ERC20.sol"'],
         inheritance: ["ERC20"],
         constructorInheritance: [""]
     }
     if(p.accessors.ownable){
-        children.imports.push("@openzeppelin/contracts/access/Ownable.sol");
+        children.imports.push('"@openzeppelin/contracts/access/Ownable.sol"');
         children.inheritance.push("Ownable");
         children.constructorInheritance.push("Ownable()");
     }

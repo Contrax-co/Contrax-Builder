@@ -18,8 +18,8 @@
       "content": [
         "import ",
         [
-          "@openzeppelin/contracts/token/ERC20/ERC20.sol",
-          "@openzeppelin/contracts/access/Ownable.sol"
+          "\"@openzeppelin/contracts/token/ERC20/ERC20.sol\"",
+          "\"@openzeppelin/contracts/access/Ownable.sol\""
         ],
         ";\n"
       ]
@@ -30,9 +30,9 @@
         "children": 3
       },
       "content": [
-        "contract",
+        "contract ",
         "Billy_Coin_",
-        "is",
+        " is ",
         [
           "ERC20",
           "Ownable"
@@ -44,8 +44,8 @@
   "stateVars": {
     "permissionsMapping": {
       "content": [
-        "enum Permission{PERMITED,PROHIBITED,UNPAUSED_ONLY,TIMELOCK};\n",
-        "mapping(bytes32=>mapping(address=>Permission) public permissions;\n"
+        "enum Permission{PERMITED,PROHIBITED,UNPAUSED_ONLY,TIMELOCK}\n",
+        "mapping(bytes32=>mapping(address=>Permission)) public permissions;\n"
       ]
     }
   },
@@ -54,18 +54,19 @@
       "arguments": 2,
       "name": 5,
       "symbol": 7,
-      "children": 8,
-      "body": 14
+      "children": 9,
+      "body": 15
     },
     "content": [
       "constructor(",
-      "bytes32[] memory _functionSignatures, address[] memory _permissionsUsers, Permission[] memory _permissionsEnum, ",
+      "bytes32[] memory _functionSignatures, address[] memory _permissionsUsers, Permission[] memory _permissionsEnum",
       "",
       ")",
       "ERC20(",
-      "Billy_Coin_",
+      "\"Billy_Coin_\"",
       ",",
-      "BLC",
+      "\"BLC\"",
+      ")",
       [
         ""
       ],
