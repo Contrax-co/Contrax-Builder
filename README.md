@@ -12,7 +12,6 @@ Current Architecture
 What's next
 -----------
 - The buildBlueprint.js file needs to be able to compile permissions and functions into rules as well forming the body of the contract blueprint.
-- Inheritance/imports need to be filled out (they only import basic ERC20 functoins now)
 - The buildContract program needs to be written to compile a blueprint to a contract
 - An expressJS backend needs to be created to take a params.json as a POST request
 

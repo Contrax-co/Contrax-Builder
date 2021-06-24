@@ -35,5 +35,40 @@
             ]
         }
     },
+    "stateVars":{
+        "permissionsMapping":{
+            "content":[
+                "enum Permission{PERMITED,PROHIBITED,UNPAUSED_ONLY,TIMELOCK};\n",
+                "mapping(bytes32=>mapping(address=>Permission) public permissions;\n"
+            ]
+        }
+    },
+    "constructor":{
+        "inputs":{
+            "arguments":2,
+            "name": 5,
+            "symbol": 7,
+            "children": 8,
+            "body": 14
+        },
+        "content":[
+            "constructor(",
+            "bytes32[] memory _functionSignatures, address[] memory _permissionsUsers, Permission[] memory _permissionsEnum, ",
+            "",
+            ")",
+            "ERC20(",
+            "",
+            ",",
+            "",
+            [""],
+            "{\n",
+            "require(_permissionsUsers.length == _permissionsEnum.length);\n",
+            "for(uint i = 0; i < _permissionsUsers.length; i++){\n",
+            "permissions[_functionSignatures[i]][_permissionsUsers[i]] = _permissionsEnum[i];\n",
+            "}\n",
+            "",
+            "}\n"
+        ]
+    },
     "footer": "}"
 }

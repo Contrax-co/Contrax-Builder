@@ -1,4 +1,4 @@
-//10:30
+//7:18 (EDT)
 const scaffold = require("./scaffold.json");
 const _params = require("./paramsEx.json");
 const fs = require('fs');
@@ -7,28 +7,40 @@ const params = filter(_params);
 let blueprint = scaffold;
 let place;
 let replace;
+let imports = getChildContracts(params);
 
 //Begin building the blueprint
 //Add compiler version
-place = blueprint.header.pragmaStatement.inputs.compilerVersion;
-replace = params.header.compilerVersion;
-blueprint.header.pragmaStatement.content[place] = replace;
+set(blueprint.header.pragmaStatement.inputs.compilerVersion, 
+    params.header.compilerVersion,
+    blueprint.header.pragmaStatement.content
+    );
 
 //Add imports
 //Note. Only adds one import right now. Going to need to keep working on it
-place = blueprint.header.imports.inputs.importPaths;
-replace = "@openzeppelin/contracts/ERC20.sol";
-blueprint.header.imports.content[place] = replace;
+set(blueprint.header.imports.inputs.importPaths,
+    imports.imports,
+    blueprint.header.imports.content);
 
 //Create contract definition
 //First set the name
-place = blueprint.header.contractDefinition.inputs.name;
-replace = params.header.name;
-blueprint.header.contractDefinition.content[place] = replace;
+set(place = blueprint.header.contractDefinition.inputs.name,
+    replace = params.header.name,
+    blueprint.header.contractDefinition.content);
 //Next set the child contracts to inherit
-place = blueprint.header.contractDefinition.inputs.children;
-replace = ["ERC20","Ownable"];                                  //ERC20 will be hardcoded always but a function will need to determine other inheritance
-blueprint.header.contractDefinition.content[place] = replace;
+set(blueprint.header.contractDefinition.inputs.children,
+    imports.inheritance,
+    blueprint.header.contractDefinition.content);
+
+//Create contract constructor
+//Set token name
+set(blueprint.constructor.inputs.name,
+    params.header.name,
+    blueprint.constructor.content);
+//Set token symbol
+set(blueprint.constructor.inputs.symbol,
+    params.header.symbol,
+    blueprint.constructor.content);
 
 //Write blueprint
 const json = JSON.stringify(blueprint,null,2);
@@ -38,6 +50,10 @@ fs.writeFile('blueprint.json', json, 'utf8', (err)=>{
         console.log("error writting to json file:\n "+err)
     }
 });
+
+function set(place, paramsValue, blueprintContent){
+    blueprintContent[place] = paramsValue;
+}
 
 // filter function. Takes in params to check for illegal entries
 function filter(p){
@@ -55,4 +71,18 @@ function filter(p){
     }
     //Will likely need to add more filters as we go on. For now this is it
     return p;
+}
+
+function getChildContracts(p){
+    let children = {
+        imports: ["@openzeppelin/contracts/token/ERC20/ERC20.sol"],
+        inheritance: ["ERC20"],
+        constructorInheritance: [""]
+    }
+    if(p.accessors.ownable){
+        children.imports.push("@openzeppelin/contracts/access/Ownable.sol");
+        children.inheritance.push("Ownable");
+        children.constructorInheritance.push("Ownable()");
+    }
+    return children;
 }

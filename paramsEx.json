@@ -1,10 +1,11 @@
 {
     "header":{
         "compilerVersion": "0.8.0",
-        "name": "Billy Coin!"
+        "name": "Billy Coin!",
+        "symbol": "BLC"
     },
     "accessors": {
-        "ownable": false,
+        "ownable": true,
         "pausable": false,
         "whiteList": true,
         "blackList": true,
