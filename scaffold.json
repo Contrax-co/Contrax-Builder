@@ -71,5 +71,23 @@
             "}\n"
         ]
     },
+    "functions":[
+        {
+            "content":[
+                "function mint(address _who, uint _amount)external{\n",
+                "_permissionCheck(msg.sig, msg.sender);\n",
+                "_mint(_who, _amount);\n",
+                "}\n"
+            ]
+        },
+        {
+            "content":[
+                "function _permissionCheck(bytes32 _sig, address _who)private{\n",
+                "Permission p = permissions[_sig][_who];\n",
+                "require((p != PROHIBITED) && (p == PERMITED || (p == UNPAUSED && !paused()) ), 'You are not permited to call this function' );\n",
+                "}\n"
+            ]
+        }
+    ],
     "footer": "}"
 }

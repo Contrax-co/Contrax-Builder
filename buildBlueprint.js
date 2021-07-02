@@ -1,4 +1,3 @@
-//7:18 (EDT)
 const scaffold = require("./scaffold.json");
 const _params = require("./paramsEx.json");
 const fs = require('fs');
@@ -41,6 +40,7 @@ set(blueprint.constructor.inputs.name,
 set(blueprint.constructor.inputs.symbol,
     '"'+params.header.symbol+'"',
     blueprint.constructor.content);
+
 
 //Write blueprint
 const json = JSON.stringify(blueprint,null,2);

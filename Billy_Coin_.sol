@@ -11,4 +11,12 @@ for(uint i = 0; i < _permissionsUsers.length; i++){
 permissions[_functionSignatures[i]][_permissionsUsers[i]] = _permissionsEnum[i];
 }
 }
+function mint(address _who, uint _amount)external{
+_permissionCheck(msg.sig, msg.sender);
+_mint(_who, _amount);
+}
+function _permissionCheck(bytes32 _sig, address _who)private{
+Permission p = permissions[_sig][_who];
+require((p != PROHIBITED) && (p == PERMITED || (p == UNPAUSED && !paused() ), 'You are not permited to call this function' );
+}
 }

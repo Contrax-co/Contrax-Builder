@@ -13,7 +13,9 @@ Current Architecture
 
 What's next
 -----------
-- The buildBlueprint.js file needs to be able to blueprint permissions and functions.
+- The buildBlueprint.js file needs to be able to blueprint functions.
+- The permissions check function needs to handle timelocks
+- non-mint functions need to be added
 - An expressJS backend needs to be created to take a params.json as a POST request.
 
 How to run
