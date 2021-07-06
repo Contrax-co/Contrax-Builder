@@ -44,6 +44,7 @@
   "stateVars": {
     "permissionsMapping": {
       "content": [
+        "uint ONE_HUNDRED_PERCENT = 10000;\n",
         "enum Permission{PERMITED,PROHIBITED,UNPAUSED_ONLY,TIMELOCK}\n",
         "mapping(bytes32=>mapping(address=>Permission)) public permissions;\n"
       ]
@@ -79,23 +80,79 @@
       "}\n"
     ]
   },
-  "functions": [
-    {
+  "functions": {
+    "names": [
+      "mint",
+      "burn",
+      "airdrop",
+      "tax",
+      "_permissionCheck",
+      "_percent"
+    ],
+    "mint": {
       "content": [
         "function mint(address _who, uint _amount)external{\n",
-        "_permissionCheck(msg.sig, msg.sender);\n",
+        "require(_permissionCheck(msg.sig, msg.sender),'Not permitted to call this function');\n",
         "_mint(_who, _amount);\n",
         "}\n"
       ]
     },
-    {
+    "burn": {
       "content": [
-        "function _permissionCheck(bytes32 _sig, address _who)private{\n",
+        ""
+      ]
+    },
+    "airdrop": {
+      "inputs": {
+        "minted": 4
+      },
+      "options": {
+        "minted": "_mint(_recievers[i],_amounts[i]);\n",
+        "!minted": "_transfer(address(this),_recievers[i],_amounts[i]);\n"
+      },
+      "content": [
+        "function airdrop(address[] memory _receivers, uint[] memory _amounts)external{\n",
+        "require(_permissionCheck(msg.sig, msg.sender),'Not permitted to call this function');\n",
+        "require(_receivers.length == _amounts.length,'Arrays must be the same length');\n",
+        "for(uint i = 0; i < _receivers.length; i++){\n",
+        "_transfer(address(this),_recievers[i],_amounts[i]);\n",
+        "}\n",
+        "}\n"
+      ]
+    },
+    "tax": {
+      "inputs": {
+        "taxReceiver": 3,
+        "tax": 5
+      },
+      "content": [
+        "function _beforeTokenTransfer(address from, address to, uint256 amount)internal override{\n",
+        "if(_permissionCheck(msg.sig, msg.sender)){\n",
+        "_transfer(from, ",
+        "'0xabcdefg'",
+        ",_percent(amount, ",
+        "100",
+        "));\n",
+        "}\n",
+        "\n"
+      ]
+    },
+    "_permissionCheck": {
+      "content": [
+        "function _permissionCheck(bytes32 _sig, address _who)private returns(bool){\n",
         "Permission p = permissions[_sig][_who];\n",
-        "require((p != PROHIBITED) && (p == PERMITED || (p == UNPAUSED && !paused() ), 'You are not permited to call this function' );\n",
+        "return((p != PROHIBITED) && (p == PERMITED || (p == UNPAUSED && !paused()) ));\n",
+        "}\n",
+        "}\n"
+      ]
+    },
+    "_percent": {
+      "content": [
+        "function _percent(uint _amount, uint _percent)private returns(uint){\n",
+        "return ((_amount * _percent) / ONE_HUNDRED_PERCENT);\n",
         "}\n"
       ]
     }
-  ],
+  },
   "footer": "}"
 }

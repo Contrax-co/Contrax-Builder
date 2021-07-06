@@ -13,27 +13,23 @@
     },
     "functions": {
         "tax": {
-            "included": false,
-            "taxSheet": [
-                {
-                    "receiver": "ADDRESS",
-                    "percent": 0
-                }
-            ],
-            "toggleAble": {
-                "included": false,
-                "permissions": {
-                    "owner": 0,
-                    "list": {
-                        "0x000000":0
-                    }
+            "included": true,
+            "config": {
+                "taxReceiver": "'0xabcdefg'",
+                "tax": "100"
+            },
+            "permissions": {
+                "owner": 0,
+                "list": {
+                    "0x000000":0
                 }
             }
         },
         "airdrop": {
-            "included": false,
-            "mintAmmount": 0,
-            "callableOnce": false,
+            "included": true,
+            "options": {
+                "minted": false
+            },
             "permissions": {
                 "owner": 0,
                 "list": {
@@ -43,9 +39,11 @@
         },
         "emptyVault": {
             "included": false,
-            "toExchange": "ADDRESS",
-            "ExchangeFor": "ADDRESS",
-            "receiver": "ADDRESS",
+            "options":{
+                "toExchange": "ADDRESS_EXCHANGE",
+                "ExchangeFor": "ADDRESS_TOKEN",
+                "receiver": "ADDRESS_LP_RECEIVER"    
+            },
             "permissions": {
                 "owner": 0,
                 "list": {
@@ -63,8 +61,7 @@
             }
         },
         "mint": {
-            "included": false,
-            "max": 0,
+            "included": true,
             "permissions": {
                 "owner": 0,
                 "list": {
@@ -80,16 +77,7 @@
                     "0x000000":0
                 }
             }
-        },
-        "rebasing": {
-            "included": false,
-            "permissions": {
-                "owner": 0,
-                "list": {
-                    "0x000000":0
-                }
-            }
-        } 
+        }
     }
 }
 

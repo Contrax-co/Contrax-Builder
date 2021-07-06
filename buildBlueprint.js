@@ -41,6 +41,19 @@ set(blueprint.constructor.inputs.symbol,
     '"'+params.header.symbol+'"',
     blueprint.constructor.content);
 
+//Remove non-included functions
+blueprint.functions.names.forEach((funcName)=>{
+    //If not included OR a private function don't include
+    console.log(funcName);
+    if(funcName.slice(0,1) != "_" && !params.functions[funcName].included){
+        blueprint.functions[funcName].content=[""];
+    }
+});
+
+funcOptions(params.functions.airdrop, blueprint.functions.airdrop);
+
+//Options for tax
+funcConfigs(params.functions.tax, blueprint.functions.tax);
 
 //Write blueprint
 const json = JSON.stringify(blueprint,null,2);
@@ -85,4 +98,29 @@ function getChildContracts(p){
         children.constructorInheritance.push("Ownable()");
     }
     return children;
+}
+
+function funcOptions(p,f){
+    if(p.included){
+        Object.keys(p.options).forEach((option)=>{
+            const input = f.inputs[option];
+            const val = p.options[option];
+            if(val){
+                f.content[input] = f.options[option];
+            }else{
+                f.content[input] = f.options["!"+option];
+            }
+            
+        });
+    }
+}
+
+function funcConfigs(p,f){
+    if(p.included){
+        Object.keys(p.config).forEach((config)=>{
+            const input = f.inputs[config];
+            const val = p.config[config];
+            f.content[input] = val;
+        });
+    }
 }

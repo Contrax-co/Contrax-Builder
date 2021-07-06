@@ -19,8 +19,8 @@ text += blueprint.stateVars.permissionsMapping.content.join('');
 text += blueprint.constructor.content.join('');
 
 //Add functions
-blueprint.functions.forEach((func)=>{
-    text += func.content.join('');
+blueprint.functions.names.forEach((funcName)=>{
+    text += blueprint.functions[funcName].content.join('');
 });
 
 //create footer
