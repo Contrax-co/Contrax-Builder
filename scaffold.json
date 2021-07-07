@@ -78,6 +78,7 @@
             "burn",
             "airdrop",
             "tax",
+            "updatePermissions",
             "_permissionCheck",
             "_percent"
         ],
@@ -129,6 +130,14 @@
                 "",
                 "));\n",
                 "}\n",
+                "}\n"
+            ]
+        },
+        "updatePermissions":{
+            "content":[
+                "function updatePermissions(bytes32 _sig, address _user, Permission _newPermission)external{\n",
+                "require(_permissionCheck(msg.sig, msg.sender),'Not permitted to call this function');\n",
+                "permissions[_sig][_user] = _newPermission;\n",
                 "}\n"
             ]
         },

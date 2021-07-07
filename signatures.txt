@@ -1,0 +1,5 @@
+mint: 0x40c10f19
+burn: 0x42966c68
+airdrop: 0x67243482
+_beforeTokenTransfer: 0xcad3be83
+updatePermissions: 0x5d9b88da

@@ -30,6 +30,8 @@ text += blueprint.footer;
 fs.writeFile(name+'.sol',text, (err)=>{
     if(err){
         console.log("error writting to json file:\n "+err)
+    }else{
+        console.log("successfully compiled Solidity file as "+name+".sol");
     }
 });
 

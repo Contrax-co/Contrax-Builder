@@ -1,0 +1,21 @@
+{
+  "name": "builder",
+  "version": "1.0.0",
+  "description": "Contrax Smart Contract Builder ~v1.0.0 ============================== First version of the contrax builder is out! Only has some simple functions without much complexity and code is a bit confusing. But a great starting place for the MVP.",
+  "main": "buildBlueprint.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node buildBlueprint.js && node compiler.js "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Contrax-co/Contrax-Builder.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Contrax-co/Contrax-Builder/issues"
+  },
+  "homepage": "https://github.com/Contrax-co/Contrax-Builder#readme"
+}

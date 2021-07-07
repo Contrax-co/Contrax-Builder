@@ -1,8 +1,8 @@
 {
     "header":{
         "compilerVersion": "0.8.0",
-        "name": "Billy Coin!",
-        "symbol": "BLC"
+        "name": "Roger$ Ep!cCoin",
+        "symbol": "REC"
     },
     "accessors": {
         "ownable": true,
@@ -15,7 +15,7 @@
         "tax": {
             "included": true,
             "config": {
-                "taxReceiver": "'0xabcdefg'",
+                "taxReceiver": "'0x27d2c7F2729029440bE539EaA61657d35b5A4AEA'",
                 "tax": "100"
             },
             "permissions": {
@@ -37,22 +37,8 @@
                 }
             }
         },
-        "emptyVault": {
-            "included": false,
-            "options":{
-                "toExchange": "ADDRESS_EXCHANGE",
-                "ExchangeFor": "ADDRESS_TOKEN",
-                "receiver": "ADDRESS_LP_RECEIVER"    
-            },
-            "permissions": {
-                "owner": 0,
-                "list": {
-                    "0x000000":0
-                }
-            }
-        },
         "burn": {
-            "included": false,
+            "included": true,
             "permissions": {
                 "owner": 0,
                 "list": {
@@ -69,8 +55,8 @@
                 }
             }
         },
-        "updateListEntry": {
-            "included": false,
+        "updatePermissions": {
+            "included": true,
             "permissions": {
                 "owner": 0,
                 "list": {

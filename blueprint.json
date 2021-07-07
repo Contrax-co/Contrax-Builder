@@ -31,7 +31,7 @@
       },
       "content": [
         "contract ",
-        "Billy_Coin_",
+        "Roger_Ep_cCoin",
         " is ",
         [
           "ERC20",
@@ -64,9 +64,9 @@
       "",
       ")",
       "ERC20(",
-      "\"Billy_Coin_\"",
+      "\"Roger_Ep_cCoin\"",
       ",",
-      "\"BLC\"",
+      "\"REC\"",
       ")",
       [
         ""
@@ -86,6 +86,7 @@
       "burn",
       "airdrop",
       "tax",
+      "updatePermissions",
       "_permissionCheck",
       "_percent"
     ],
@@ -99,7 +100,10 @@
     },
     "burn": {
       "content": [
-        ""
+        "function burn(uint _amount)external{\n",
+        "require(_permissionCheck(msg.sig, msg.sender),'Not permitted to call this function');\n",
+        "_burn(msg.sender,_amount);\n",
+        "}\n"
       ]
     },
     "airdrop": {
@@ -129,12 +133,20 @@
         "function _beforeTokenTransfer(address from, address to, uint256 amount)internal override{\n",
         "if(_permissionCheck(msg.sig, msg.sender)){\n",
         "_transfer(from, ",
-        "'0xabcdefg'",
+        "'0x27d2c7F2729029440bE539EaA61657d35b5A4AEA'",
         ",_percent(amount, ",
         "100",
         "));\n",
         "}\n",
-        "\n"
+        "}\n"
+      ]
+    },
+    "updatePermissions": {
+      "content": [
+        "function updatePermissions(bytes32 _sig, address _user, Permission _newPermission)external{\n",
+        "require(_permissionCheck(msg.sig, msg.sender),'Not permitted to call this function');\n",
+        "permissions[_sig][_user] = _newPermission;\n",
+        "}\n"
       ]
     },
     "_permissionCheck": {
@@ -142,7 +154,6 @@
         "function _permissionCheck(bytes32 _sig, address _who)private returns(bool){\n",
         "Permission p = permissions[_sig][_who];\n",
         "return((p != PROHIBITED) && (p == PERMITED || (p == UNPAUSED && !paused()) ));\n",
-        "}\n",
         "}\n"
       ]
     },

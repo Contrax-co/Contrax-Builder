@@ -1,7 +1,6 @@
-Contrax Smart Contract Builder
+Contrax Smart Contract Builder ~v1.0.0
 ==============================
-As of right now, the header of the contracts are built into a "blueprint" which is used to compile into the solidity code.
-Also only the header/constructor are formed right now. Functions and permissions are still to be built
+First version of the contrax builder is out! Only has some simple functions without much complexity and code is a bit confusing. But a great starting place for the MVP.
 
 Current Architecture
 --------------------
@@ -11,15 +10,20 @@ Current Architecture
 - the ordered params are written to "blueprint.json"
 - compiler.js reads the blueprint to create a text string of working code and prints it to a Solidity file 
 
+Helper Functions
+----------------
+The blueprint builder has a few helper functions:
+- `getChildContracts()` pushes children to the blueprint for necessary imports, inheritance declarations and constructor modifiers
+- `funcOptions()` handles options in the params.json. Options are binary options that change what code is injected
+- `funcConfigs()` handles configs in the params.json. Configs are nonBinary text to be injected in the code
+
 What's next
 -----------
-- The buildBlueprint.js file needs to be able to blueprint functions.
-- The permissions check function needs to handle timelocks
-- non-mint functions need to be added
 - An expressJS backend needs to be created to take a params.json as a POST request.
+- More functions, options, and configs
 
 How to run
 ----------
-Make sure you have nodeJS installed and run the following command:  
-`npm buildBlueprint.js` to create the blueprint
-`npm compiler.js` to compile blueprint into a Solidity file
+* first edit the paramsEx.json to customize your contract. This is what will eventually come from the frontend
+* next run `npm run build`
+* Look at your newly created Solidity file. Notice indentation is not yet included
