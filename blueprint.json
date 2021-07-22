@@ -56,7 +56,7 @@
       "name": 5,
       "symbol": 7,
       "children": 9,
-      "body": 15
+      "supply": 16
     },
     "content": [
       "constructor(",
@@ -76,7 +76,9 @@
       "for(uint i = 0; i < _permissionsUsers.length; i++){\n",
       "permissions[_functionSignatures[i]][_permissionsUsers[i]] = _permissionsEnum[i];\n",
       "}\n",
-      "",
+      "_mint(msg.sender, ",
+      "100000000000000000000000000",
+      ");\n",
       "}\n"
     ]
   },

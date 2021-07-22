@@ -36,17 +36,24 @@ set(blueprint.header.contractDefinition.inputs.children,
 set(blueprint.constructor.inputs.name,
     '"'+params.header.name+'"',
     blueprint.constructor.content);
+
 //Set token symbol
 set(blueprint.constructor.inputs.symbol,
     '"'+params.header.symbol+'"',
     blueprint.constructor.content);
 
+//Set initial supply
+set(blueprint.constructor.inputs.supply,
+    params.header.initialSupply,
+    blueprint.constructor.content);
+
 //Remove non-included functions
-blueprint.functions.names.forEach((funcName)=>{
+//And set blacklist if necessary
+Object.keys(params.functions).forEach((func)=>{
     //If not included OR a private function don't include
-    console.log(funcName);
-    if(funcName.slice(0,1) != "_" && !params.functions[funcName].included){
-        blueprint.functions[funcName].content=[""];
+    console.log(func);
+    if(func.slice(0,1) != "_" && !params.functions[func].included){
+        blueprint.functions[func].content=[""];
     }
 });
 
@@ -70,10 +77,6 @@ function set(place, paramsValue, blueprintContent){
 
 // filter function. Takes in params to check for illegal entries
 function filter(p){
-    //Cannot be a whitelist AND blacklist
-    if(p.accessors.whiteList && p.accessors.blackList){
-        p.accessors.whiteList = false;
-    }
     //Compiler version must be 0.8.0 for now. Could change in the future
     if(p.header.compilerVersion != "0.8.0"){
         p.header.compilerVersion = "0.8.0";
